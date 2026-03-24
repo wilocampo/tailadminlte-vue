@@ -1,1 +1,73 @@
-<template><div></div></template>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import { UserPlus, Github } from 'lucide-vue-next'
+import InputGroup from '@/components/forms/InputGroup.vue'
+
+const fullName = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const agreeTerms = ref(false)
+</script>
+
+<template>
+  <div class="auth-v2-wrapper">
+    <!-- Left: Form -->
+    <div class="auth-v2-form">
+      <div class="auth-v2-form-inner">
+
+        <!-- Logo -->
+        <div class="auth-logo">
+          <RouterLink to="/"><span>Tail</span>AdminLTE</RouterLink>
+          <p>Register a new membership</p>
+        </div>
+
+        <!-- Register Form -->
+        <form @submit.prevent>
+          <InputGroup v-model="fullName" type="text" placeholder="Full Name" icon="User" />
+          <InputGroup v-model="email" type="email" placeholder="Email" icon="Mail" />
+          <InputGroup v-model="password" type="password" placeholder="Password" icon="Lock" />
+          <InputGroup v-model="confirmPassword" type="password" placeholder="Confirm Password" icon="Lock" />
+
+          <div class="auth-terms">
+            <input type="checkbox" id="terms" v-model="agreeTerms">
+            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+          </div>
+
+          <button type="submit" class="auth-btn auth-btn-primary">
+            Register <UserPlus class="w-4 h-4" />
+          </button>
+        </form>
+
+        <!-- Social Login -->
+        <div class="auth-divider">OR</div>
+
+        <div class="auth-social-buttons">
+          <a href="#" class="auth-social-btn btn-facebook" title="Sign up with Facebook">f</a>
+          <a href="#" class="auth-social-btn btn-google" title="Sign up with Google">G+</a>
+          <a href="#" class="auth-social-btn btn-github" title="Sign up with GitHub">
+            <Github class="w-4 h-4" />
+          </a>
+        </div>
+
+        <!-- Links -->
+        <div class="auth-links">
+          <p><RouterLink to="/auth/login-v2">I already have a membership</RouterLink></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right: Decorative Panel -->
+    <div class="auth-v2-panel">
+      <div class="auth-v2-panel-content">
+        <div class="panel-icon">
+          <UserPlus class="w-20 h-20 mx-auto" />
+        </div>
+        <h2>Join Us Today!</h2>
+        <p>Create your account to unlock all features. Manage your projects, collaborate with your team, and track your progress all in one place.</p>
+      </div>
+    </div>
+  </div>
+</template>

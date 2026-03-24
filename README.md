@@ -2,11 +2,18 @@
 
 **AdminLTE v4 reimagined with Vue 3 + Tailwind CSS** — A free, open-source admin dashboard template built with Vue 3, TypeScript, Pinia, and Vue Router. Clone it and build your next admin panel on top.
 
+<h3 align="center">
+  <a href="https://tailadminlte-vue.vercel.app/">Live Demo</a>
+</h3>
+
 <p align="center">
-  <img src="docs/screenshots/dashboard-v1-light.png" alt="TailAdminLTE Vue Dashboard" width="100%">
+  <a href="https://tailadminlte-vue.vercel.app/">
+    <img src="docs/screenshots/dashboard-v1-light.png" alt="TailAdminLTE Vue Dashboard" width="100%">
+  </a>
 </p>
 
 <p align="center">
+  <a href="https://tailadminlte-vue.vercel.app/">Live Demo</a> &bull;
   <a href="#features">Features</a> &bull;
   <a href="#screenshots">Screenshots</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;

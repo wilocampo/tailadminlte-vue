@@ -51,28 +51,24 @@ function send() {
           class="direct-chat-msg"
           :class="{ right: msg.side === 'right' }"
         >
-          <div class="direct-chat-infos">
-            <span
-              class="direct-chat-name"
-              :class="msg.side === 'right' ? 'float-right' : 'float-left'"
-            >{{ msg.name }}</span>
-            <span
-              class="direct-chat-timestamp"
-              :class="msg.side === 'right' ? 'float-left' : 'float-right'"
-            >{{ msg.time }}</span>
-          </div>
           <img :src="msg.avatar" class="direct-chat-img" alt="">
-          <div class="direct-chat-text">{{ msg.text }}</div>
+          <div>
+            <div class="direct-chat-infos">
+              <span class="direct-chat-name">{{ msg.name }}</span>
+              <span class="direct-chat-timestamp">{{ msg.time }}</span>
+            </div>
+            <div class="direct-chat-text">{{ msg.text }}</div>
+          </div>
         </div>
       </div>
       <div class="direct-chat-contacts">
         <ul class="direct-chat-contacts-list">
           <li v-for="(contact, index) in contacts" :key="index">
-            <a href="#">
-              <img :src="contact.avatar" class="direct-chat-img" alt="">
-              <span class="direct-chat-name">{{ contact.name }}</span>
-              <span class="direct-chat-timestamp">{{ contact.status }}</span>
-            </a>
+            <img :src="contact.avatar" alt="">
+            <div class="contacts-info">
+              <span class="contact-name">{{ contact.name }}</span>
+              <span class="contact-status">{{ contact.status }}</span>
+            </div>
           </li>
         </ul>
       </div>

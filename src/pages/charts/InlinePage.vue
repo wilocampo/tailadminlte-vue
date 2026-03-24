@@ -56,17 +56,27 @@ const miniBar3: ChartData<'bar'> = {
   datasets: [{ data: [1300,1500,1400,1800,1700,1900,1700], backgroundColor: 'rgba(245,158,11,0.7)', borderRadius: 2 }],
 }
 
+const trafficSources = [
+  { label: 'Organic Search', value: 42, color: '#3b82f6', barClass: 'bg-primary' },
+  { label: 'Social Media', value: 28, color: '#22c55e', barClass: 'bg-success' },
+  { label: 'Direct', value: 18, color: '#f59e0b', barClass: 'bg-warning' },
+  { label: 'Referral', value: 12, color: '#ef4444', barClass: 'bg-danger' },
+]
+
 const doughnutBg = computed(() => {
   const isDark = darkMode.mode === 'dark' || (darkMode.mode === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
   return isDark ? '#374151' : '#e5e7eb'
 })
 
-function miniDoughnutData(value: number, color: string): ChartData<'doughnut'> {
-  return { datasets: [{ data: [value, 100 - value], backgroundColor: [color, doughnutBg.value], borderWidth: 0 }] }
-}
+const miniDoughnutDataSets = computed(() =>
+  trafficSources.map(src => ({
+    datasets: [{ data: [src.value, 100 - src.value], backgroundColor: [src.color, doughnutBg.value], borderWidth: 0 }],
+  } as ChartData<'doughnut'>))
+)
 
 const miniDoughnutOpts: ChartOptions<'doughnut'> = {
   cutout: '70%',
+  maintainAspectRatio: true,
   plugins: { legend: { display: false }, tooltip: { enabled: false } },
 }
 
@@ -81,13 +91,6 @@ const statCards = [
   { title: 'New Users', value: '1,842', change: '+8.3% from last month', positive: true, icon: Users, iconBg: 'bg-green-100 dark:bg-green-900/30', iconColor: 'text-green-600', data: sparkUsers },
   { title: 'Orders', value: '3,672', change: '-2.1% from last month', positive: false, icon: ShoppingBag, iconBg: 'bg-yellow-100 dark:bg-yellow-900/30', iconColor: 'text-yellow-600', data: sparkOrders },
   { title: 'Bounce Rate', value: '24.8%', change: '-4.2% from last month', positive: true, icon: Activity, iconBg: 'bg-red-100 dark:bg-red-900/30', iconColor: 'text-red-600', data: sparkBounce },
-]
-
-const trafficSources = [
-  { label: 'Organic Search', value: 42, color: '#3b82f6', barClass: 'bg-primary' },
-  { label: 'Social Media', value: 28, color: '#22c55e', barClass: 'bg-success' },
-  { label: 'Direct', value: 18, color: '#f59e0b', barClass: 'bg-warning' },
-  { label: 'Referral', value: 12, color: '#ef4444', barClass: 'bg-danger' },
 ]
 
 const performanceRows = [
@@ -158,9 +161,9 @@ const cssBars = [
       <div class="card-header"><h3 class="card-title">Traffic Sources</h3></div>
       <div class="card-body">
         <div class="space-y-4">
-          <div v-for="src in trafficSources" :key="src.label" class="flex items-center gap-4">
+          <div v-for="(src, idx) in trafficSources" :key="src.label" class="flex items-center gap-4">
             <div class="w-14 h-14 shrink-0">
-              <DoughnutChart :data="miniDoughnutData(src.value, src.color)" :options="miniDoughnutOpts" />
+              <DoughnutChart :data="miniDoughnutDataSets[idx]" :options="miniDoughnutOpts" />
             </div>
             <div class="flex-1">
               <div class="flex justify-between items-center mb-1">
